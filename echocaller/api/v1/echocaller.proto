@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package labolith.echocaller.v1;
+
+option go_package = "github.com/110y/echocaller/echoserver/api/v1";
+
+import "echoserver/api/v1/echoserver.proto";
+import "google/api/annotations.proto";
+
+service EchoCaller {
+  rpc Echo(labolith.echoserver.v1.EchoRequest) returns (labolith.echoserver.v1.EchoResponse){
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  };
+}

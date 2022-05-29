@@ -1,0 +1,30 @@
+---
+version: "3.8"
+
+services:
+
+  echoserver:
+    image: golang:1.18.2-bullseye
+    ports:
+      - ${GRPC_PORT:-5000}:5000
+    volumes:
+      - .:/go/src/github.com/110y/echoserver:cached
+      - $GOPATH/pkg/mod:/go/pkg/mod:cached
+    environment:
+      GRPC_PORT: 5000
+    working_dir: /go/src/github.com/110y/echoserver
+    command: go run ./echoserver
+
+  echocaller:
+    image: golang:1.18.2-bullseye
+    ports:
+      - ${ECHOCALLER_GRPC_PORT:-5001}:5000
+    volumes:
+      - .:/go/src/github.com/110y/echoserver:cached
+      - $GOPATH/pkg/mod:/go/pkg/mod:cached
+    environment:
+      GRPC_PORT: 5000
+      ECHO_SERVER_ADDR: echoserver:5000
+      ECHO_SERVER_TRANSPORT_INSECURE: 'true'
+    working_dir: /go/src/github.com/110y/echoserver
+    command: go run ./echocaller

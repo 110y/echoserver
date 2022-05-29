@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package labolith.echoserver.v1;
+
+option go_package = "github.com/110y/echoserver/echoserver/api/v1";
+
+import "google/api/annotations.proto";
+
+service EchoServer {
+  rpc Echo(EchoRequest) returns (EchoResponse){
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  };
+}
+
+message EchoRequest {
+  string message = 1;
+}
+
+message EchoResponse {
+  string message = 1;
+  map<string, HeaderValue> headers = 2;
+}
+
+message HeaderValue {
+  repeated string value = 1;
+}
