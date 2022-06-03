@@ -1,4 +1,4 @@
-FROM golang:1.18.1-bullseye AS builder
+FROM golang:1.18.3-bullseye AS builder
 
 ENV GOOS=linux
 ENV GOARCH=amd64
