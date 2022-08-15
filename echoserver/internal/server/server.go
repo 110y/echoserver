@@ -24,6 +24,10 @@ var (
 	_ servergroup.Stopper = (*Server)(nil)
 )
 
+var allowAllHeaderMatcher = func(key string) (string, bool) {
+	return key, true
+}
+
 func NewServer(port int) *Server {
 	grpcServer := grpc.NewServer()
 
@@ -31,7 +35,9 @@ func NewServer(port int) *Server {
 	channelz.RegisterChannelzServiceToServer(grpcServer)
 	echoserverpb.RegisterEchoServerServer(grpcServer, &echoserver{})
 
-	mux := runtime.NewServeMux()
+	mux := runtime.NewServeMux(
+		runtime.WithIncomingHeaderMatcher(allowAllHeaderMatcher),
+	)
 
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if httputil.IsGRPCRequest(r) {
