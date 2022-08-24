@@ -1,8 +1,5 @@
 FROM golang:1.19.0-bullseye AS builder
 
-ENV GOOS=linux
-ENV GOARCH=amd64
-
 WORKDIR /go/src/github.com/110y/echoserver
 
 COPY go.mod go.mod

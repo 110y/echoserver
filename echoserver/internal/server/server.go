@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"net/textproto"
 
 	"github.com/110y/servergroup"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -25,6 +26,14 @@ var (
 )
 
 var allowAllHeaderMatcher = func(key string) (string, bool) {
+	canonicalKey := textproto.CanonicalMIMEHeaderKey(key)
+
+	// Authorization header will be passed through to the grpc server by default. So, ignore it.
+	// https://github.com/grpc-ecosystem/grpc-gateway/blob/fe9f8e44508964f5c490bb36c17db8240df3e213/runtime/context.go#L123-L125
+	if canonicalKey == "Authorization" {
+		return "", false
+	}
+
 	return key, true
 }
 
