@@ -1,0 +1,9 @@
+*
+
+!/Makefile
+!/echoserver
+!/echocaller
+!/go.mod
+!/go.sum
+!/internal
+!/vendor
