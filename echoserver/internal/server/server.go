@@ -34,6 +34,11 @@ var allowAllHeaderMatcher = func(key string) (string, bool) {
 		return "", false
 	}
 
+	// Content-Length must not be passed to the grpc server, otherwise, the grpc server will return a `stream terminated by RST_STREAM with error code: PROTOCOL_ERROR` error
+	if canonicalKey == "Content-Length" {
+		return "", false
+	}
+
 	return key, true
 }
 
