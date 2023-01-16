@@ -10,7 +10,7 @@ import "google/api/annotations.proto";
 service EchoCaller {
   rpc Echo(labolith.echoserver.v1.EchoRequest) returns (labolith.echoserver.v1.EchoResponse){
     option (google.api.http) = {
-      post: "/"
+      post: "/*"
       body: "*"
     };
   };

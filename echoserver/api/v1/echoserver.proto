@@ -9,7 +9,7 @@ import "google/api/annotations.proto";
 service EchoServer {
   rpc Echo(EchoRequest) returns (EchoResponse){
     option (google.api.http) = {
-      post: "/"
+      post: "/*"
       body: "*"
     };
   };

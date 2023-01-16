@@ -78,7 +78,7 @@ func RegisterEchoServerHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/labolith.echoserver.v1.EchoServer/Echo", runtime.WithHTTPPathPattern("/"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/labolith.echoserver.v1.EchoServer/Echo", runtime.WithHTTPPathPattern("/*"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -141,7 +141,7 @@ func RegisterEchoServerHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/labolith.echoserver.v1.EchoServer/Echo", runtime.WithHTTPPathPattern("/"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/labolith.echoserver.v1.EchoServer/Echo", runtime.WithHTTPPathPattern("/*"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -161,7 +161,7 @@ func RegisterEchoServerHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 }
 
 var (
-	pattern_EchoServer_Echo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{""}, ""))
+	pattern_EchoServer_Echo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{1, 0}, []string(nil), ""))
 )
 
 var (
