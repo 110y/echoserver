@@ -1,6 +1,6 @@
 module github.com/110y/echoserver
 
-go 1.19
+go 1.23
 
 require (
 	github.com/110y/run v1.0.1

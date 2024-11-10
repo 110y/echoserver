@@ -1,4 +1,4 @@
-FROM golang:1.19.0-bullseye AS builder
+FROM golang:1.23.2-bookworm AS builder
 
 WORKDIR /go/src/github.com/110y/echoserver
 

@@ -2,7 +2,7 @@
 services:
 
   echoserver:
-    image: golang:1.19.5-bullseye
+    image: golang:1.23.2-bookworm
     ports:
       - ${GRPC_PORT:-5000}:5000
     volumes:
@@ -14,7 +14,7 @@ services:
     command: go run ./echoserver
 
   echocaller:
-    image: golang:1.19.5-bullseye
+    image: golang:1.23.2-bookworm
     ports:
       - ${ECHOCALLER_GRPC_PORT:-5001}:5000
     volumes:
